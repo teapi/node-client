@@ -1,6 +1,5 @@
 var teapi = require('./../lib');
 var Promise = require('bluebird');
-var request = Promise.promisify(require("request"));
 
 describe("document", function(){
   beforeEach(function(){
@@ -68,6 +67,6 @@ describe("document", function(){
     expect(options.url).toEqual('https://test.teapi.io/v1/documents')
     expect(options.headers['Date']).toEqual('Fri, 29 Aug 1997 07:14:00 GMT')
     expect(options.headers['Authorization']).toEqual('HMAC-SHA256 Credential=12399akk4ja,Signature=' + sig)
-    return Promise.resolve(true);
+    return Promise.resolve([{statusCode: 200}]);
   };
 });
