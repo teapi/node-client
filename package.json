@@ -1,0 +1,27 @@
+{
+  "name": "Teapi",
+  "version": "0.0.1",
+  "description": "Teapi Node.JS Management Client",
+  "keywords": ["teapi", "api"],
+  "homepage": "https://docs.teapi.io/",
+  "main": "./lib",
+  "engines": { "node": ">=0.10.0" },
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/teapi/node-client.git"
+  },
+  "bugs": {
+    "url": "https://github.com/teapi/node-client/issues"
+  },
+  "author": "Karl Seguin",
+  "dependencies": {
+    "bluebird": "= 2.4.2",
+    "request":  "=2.51.0"
+  },
+  "devDependencies": {
+    "jasmine-node": "= 1.14.5"
+  },
+  "scripts": {
+    "test": "jasmine-node specs"
+  }
+}
