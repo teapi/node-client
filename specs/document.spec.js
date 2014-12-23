@@ -50,12 +50,23 @@ describe("document", function(){
     });
   });
 
-  it("deletes the documet", function(done){
+  it("deletes the document", function(done){
     tp = teapi('test.teapi.io', '12399akk4ja', 'over9000!');
     spyOn(tp, '_request').andCallFake(function(options) {
       return assertOptions(options, 'delete', {type: 'harkonnen',id: 4994}, 'fc8983b543a67040f046540f146b74a6a84f56fa9aa343ec26b0cfb6fa2f3244')
     });
     tp.document.delete('harkonnen', 4994).then(function(res){
+      expect(tp._request).toHaveBeenCalled();
+      done();
+    });
+  });
+
+  it("bulk updates documents", function(done){
+    tp = teapi('test.teapi.io', '12399akk4ja', 'over9000!');
+    spyOn(tp, '_request').andCallFake(function(options) {
+      return assertOptions(options, 'post', {type: 'articles', deletes: [{id: 92}], upserts: [{doc: {id:4}}, {doc: {id:5}}]}, '76e3907c084b37ddb94437f00cb53bddfae5df95671563f8fbf98266c8ea8730')
+    });
+    tp.document.bulk('articles', [{doc: {id:4}}, {doc: {id:5}}], [{id: 92}]).then(function(res){
       expect(tp._request).toHaveBeenCalled();
       done();
     });
