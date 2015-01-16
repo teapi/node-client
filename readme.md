@@ -39,7 +39,7 @@ if indexes were created for `name`, `active` and `power`, Teapi would index the 
 # Bulk Updates
 More efficiently, bulk changes can be provided for a given type:
 
-```ruby
+```javascript
 # Create or update leto and jessica and delete the documents
 # with ids 9, 29 and 23
 teapi.documents.bulk('people',
@@ -65,6 +65,27 @@ teapi.documents.bulk('people',
   ],
   [{id: 9}, {id: 29}, {id: 23}]
 )
+```
+
+## Lists
+Document ids can be pushed onto and removed from lists:
+
+```javascript
+teapi.lists.insert('people', 'newest', [1, 4, 992])
+teapi.lists.delete('people', 'newest', 992)
+```
+
+For both `insert` and `delete`, the ids can either be a single value or an array (up to 1000 ids can be inserted / deleted at a time). You can also pass no ids to `delete`. This will remove all ids from the list:
+
+```javascript
+teapi.lists.delete('people', 'newest')
+```
+
+`insert` takes a 4th, optional, parameter: `truncate`. This defaults to `false`, but when set to true, it'll delete all existing ids then insert the newly provide one(s):
+
+```javascript
+// this will result in a list of only 1 id (99)
+teapi.lists.insert('people', 'newest', 99, true)
 ```
 
 # Return value
